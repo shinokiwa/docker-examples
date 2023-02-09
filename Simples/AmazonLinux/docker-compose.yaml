@@ -1,0 +1,14 @@
+version: '3'
+
+services:
+    amazonlinux:
+        container_name: amazonlinux
+        build:
+            context: ./docker/
+            dockerfile: Dockerfile
+        tty: true
+        environment:
+            LANG: ja_JP.UTF-8
+            LANGUAGE: ja_JP:ja
+            LC_ALL: ja_JP.UTF-8
+            TZ: JST-9

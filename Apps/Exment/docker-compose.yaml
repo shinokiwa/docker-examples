@@ -1,0 +1,35 @@
+version: '3'
+services:
+  mariadb:
+    container_name: mariadb
+    image: mariadb:10.4
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${EXMENT_DOCKER_MYSQL_DATABASE-laravel}
+      MYSQL_ROOT_PASSWORD: ${EXMENT_DOCKER_MYSQL_ROOT_PASSWORD-secret}
+      MYSQL_USER: ${EXMENT_DOCKER_MYSQL_USER-root}
+      MYSQL_PASSWORD: ${EXMENT_DOCKER_MYSQL_PASSWORD-secret}
+    networks:
+      - exment-network
+
+  web:
+    container_name: web
+    build:
+      context: ./docker/web
+      dockerfile: Dockerfile
+    depends_on:
+        - mariadb
+    ports:
+      - ${EXMENT_DOCKER_HTTP_PORTS-8080}:80
+    volumes:
+      - www-data:/var/www/exment
+    networks:
+      - exment-network
+
+volumes:
+  www-data:
+  mariadb-data:
+
+networks:
+  exment-network:

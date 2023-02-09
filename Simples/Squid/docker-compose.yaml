@@ -1,0 +1,11 @@
+version: '3'
+
+services:
+   squid:
+     image: ubuntu/squid
+     tty: true
+     ports:
+        - 3128:3128
+     environment:
+       TZ: JST-9
+
