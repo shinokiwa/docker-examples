@@ -1,4 +1,4 @@
-# 空の Ubuntu コンテナ
+# 空の Amazon Linux コンテナ
 
 ## 概要
 
