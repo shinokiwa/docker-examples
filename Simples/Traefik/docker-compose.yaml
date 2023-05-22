@@ -1,0 +1,32 @@
+# Traefikによるリバースプロキシのコンテナ
+# Windowsで使う場合は、起動前に環境変数 COMPOSE_CONVERT_WINDOWS_PATHS=1 を設定する。
+version: '3'
+
+services:
+  traefik:
+    image: traefik:v2.4
+    command:
+      - "--configFile=/etc/traefik/traefik.toml"
+    ports:
+      - 80:80
+      - 443:443
+      - 8080:8080
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./docker/etc/traefik/traefik.toml:/etc/traefik/traefik.toml
+    networks:
+      - traefik-network
+
+  # Traefikでルーティングするサンプル用のnginxコンテナ
+  nginx:
+    image: nginx:latest
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nginx.rule=Host(`nginx.localhost`)"
+    networks:
+      - traefik-network
+
+# 他の docker-compose.yaml にコンテナを作成する際は、以下の記述を external: true にしてコピーする
+networks:
+  traefik-network:
+    external: false
