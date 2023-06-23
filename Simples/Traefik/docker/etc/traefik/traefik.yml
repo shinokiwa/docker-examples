@@ -1,0 +1,24 @@
+#############################
+# Traefik 設定ファイル
+#
+# このファイルは基本的に要再起動の設定項目を記載する
+#############################
+entryPoints:
+  http:
+    address: :80
+  https:
+    address: :443
+
+providers:
+  docker:
+    endpoint: "unix:///var/run/docker.sock"
+    watch: true
+    exposedByDefault: false
+    defaultRule: Host(`{{ index .Labels "com.docker.compose.project" }}.{{ env "DOMAIN" }}`)
+
+  file:
+    directory: "/etc/traefik/dynamic_conf"
+
+api:
+  insecure: true
+  dashboard: true

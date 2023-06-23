@@ -1,0 +1,9 @@
+# ssl/tls関連の設定
+# 基本的に再起動不要
+tls:
+  options:
+    default:
+      clientAuth:
+        caFiles:
+          - /tools/certs/cacert.crt
+        clientAuthType: RequireAndVerifyClientCert

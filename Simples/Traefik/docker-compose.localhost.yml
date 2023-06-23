@@ -1,0 +1,10 @@
+# Traefikをlocalhostで動かすためのオーバーライド用compose
+# Windowsで使う場合は、起動前に環境変数 COMPOSE_CONVERT_WINDOWS_PATHS=1 を設定する。
+version: '3'
+
+services:
+  traefik:
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./volumes/traefik/tools/certs:/tools/certs
+      - ./configs/traefik-localhost/etc/traefik:/etc/traefik
