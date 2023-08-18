@@ -1,7 +1,7 @@
 #############################################
 ### OSのセットアップ
 #############################################
-FROM rockylinux:9.2
+FROM rockylinux/rockylinux:9.2
 
 # 必要なパッケージのインストール
 RUN amazon-linux-extras install -y

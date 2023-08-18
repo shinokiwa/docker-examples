@@ -1,0 +1,28 @@
+#
+# 開発環境構築用composeファイル
+#
+version: '3.6'
+services:
+  #
+  # てきとうな実行コンテナ
+  #
+  devcon:
+    build:
+      context: ../
+      dockerfile: ./.devcontainer/Dockerfile
+    container_name: devcon
+    environment:
+      - DEBUG=app:*
+    ports:
+      - target: 80
+        published: 8080
+        protocol: tcp
+        mode: host
+    volumes:
+      - type: bind
+        source: "../"
+        target: "/app"
+    tty: true
+
+volumes:
+  npm_volume:

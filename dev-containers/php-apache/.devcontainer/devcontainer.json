@@ -1,0 +1,14 @@
+{
+  "dockerComposeFile": "./docker-compose.yml",
+  "service": "devcon",
+	"workspaceFolder": "/app",
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"EditorConfig.EditorConfig",
+				"ms-azuretools.vscode-docker",
+				"bmewburn.vscode-intelephense-client"
+			]
+		}
+	}
+}
